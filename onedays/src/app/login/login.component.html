@@ -1,0 +1,36 @@
+<h2>{{ pageTitle }}</h2>
+<h2>{{ count }}</h2>
+<button (click)="fncBtnNameChange()" >Change Button Title</button>
+<button>{{btnName}}</button>
+<input (keyup)="fncBtnNameChange()" />
+<br/>
+<button (click)="changeCount(90)" >Change Count</button>
+<br/>
+<br/>
+<input (keyup)="searchFnc($event)" placeholder="Search.." />
+<br/>
+<br/>
+<h2>{{ email }}</h2>
+<input [(ngModel)]="email"  placeholder="E-Mail" />
+<br/>
+<br/>
+<p>{{ user.name }}</p>
+<p>{{ user.surname }}</p>
+<p>{{ user.status }}</p>
+<p>{{ user.age }}</p>
+<hr/>
+@if (users.length > 0) {
+    <ul>
+        @for(item of users; track $index) {
+            <li>{{ $index }} - {{ item }}</li>
+        }
+    </ul>
+}
+
+@if (users.length === 0) {
+    <div>Users Empty!</div>
+}
+
+@for (key of userKey; track $index) {
+    <div>{{ key }}</div>
+}
