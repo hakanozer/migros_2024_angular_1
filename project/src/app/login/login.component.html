@@ -2,6 +2,11 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
         <h2>User Login</h2>
+        @if (loginError != '') {
+            <div class="alert alert-danger" role="alert">
+                {{ loginError }}
+            </div>
+        }
         <form [formGroup]="loginForm" (submit)="userLogin()" >
             <div class="mb-3">
                 <input formControlName="username" class="form-control" placeholder="Username" />

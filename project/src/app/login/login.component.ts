@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { login_url } from '../../utils/util';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 export class LoginComponent {
 
   loginStatus = false
-  constructor( private fb:FormBuilder ) { }
+  loginError = ''
+  constructor( private fb:FormBuilder, private http: HttpClient ) { }
   loginForm = this.fb.group({
     username: undefined,
     password: undefined
@@ -39,9 +42,29 @@ export class LoginComponent {
 
   userLogin() {
     this.loginStatus = true
+    this.loginError = ''
     const valid = this.loginForm.valid
     if (valid) {
-      console.log("form submit")
+
+    const username = this.username?.value
+    const password = this.password?.value
+    const sendObj = {
+      username: username,
+      password: password
+    }
+
+    const newThis = this
+    this.http.post(login_url, sendObj).subscribe({
+      next(res) {
+        console.log(res)
+      },
+      error(err) {
+        console.error(err.error.message)
+        newThis.loginError = err.error.message
+      },
+    })
+
+    console.log("this line call")
     }
   }
 
