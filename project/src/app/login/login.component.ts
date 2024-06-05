@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { login_url } from '../../utils/util';
 import { IUser } from '../../models/IUser';
-import { setUser } from '../../utils/userStore';
+import { getUser, setUser } from '../../utils/userStore';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,13 @@ export class LoginComponent {
 
   loginStatus = false
   loginError = ''
-  constructor( private fb:FormBuilder, private http: HttpClient ) { }
+  constructor( private fb:FormBuilder, private http: HttpClient, private router: Router ) {
+    const user = getUser()
+    if (user) {
+      console.log(user)
+    }
+   }
+
   loginForm = this.fb.group({
     username: '',
     password: ''
@@ -60,6 +67,7 @@ export class LoginComponent {
     this.http.post<IUser>(login_url, sendObj).subscribe({
       next(res) {
         setUser(res)
+        newThis.router.navigate(['/dashboard'])
       },
       error(err) {
         console.error(err.error.message)

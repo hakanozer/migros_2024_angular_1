@@ -8,9 +8,13 @@ export const setUser = ( user: IUser ) => {
 export const getUser = () => {
     const stUser = localStorage.getItem('user')
     if (stUser) {
-        const userObj = JSON.parse(stUser)
-        const user = userObj as IUser
-        return user
+        try {
+            const userObj = JSON.parse(stUser)
+            const user = userObj as IUser
+            return user 
+        } catch (error) {
+            localStorage.removeItem('user')
+        }
     }
     return null
 }
