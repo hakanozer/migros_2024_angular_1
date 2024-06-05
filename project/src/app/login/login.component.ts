@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { login_url } from '../../utils/util';
+import { IUser } from '../../models/IUser';
+import { setUser } from '../../utils/userStore';
+
 
 @Component({
   selector: 'app-login',
@@ -16,16 +19,16 @@ export class LoginComponent {
   loginError = ''
   constructor( private fb:FormBuilder, private http: HttpClient ) { }
   loginForm = this.fb.group({
-    username: undefined,
-    password: undefined
+    username: '',
+    password: ''
   })
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl(this.loginForm.value.username, [
+      username: new FormControl('emmaj', [
         Validators.required
       ]),
-      password: new FormControl(this.loginForm.value.password, [
+      password: new FormControl('emmajpass', [
         Validators.required
       ])
     })
@@ -54,9 +57,9 @@ export class LoginComponent {
     }
 
     const newThis = this
-    this.http.post(login_url, sendObj).subscribe({
+    this.http.post<IUser>(login_url, sendObj).subscribe({
       next(res) {
-        console.log(res)
+        setUser(res)
       },
       error(err) {
         console.error(err.error.message)
