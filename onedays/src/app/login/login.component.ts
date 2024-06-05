@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IProduct } from '../../models/IProduct';
+import { action1 } from '../../utils/util';
+
 
 @Component({
   selector: 'app-login',
@@ -47,6 +49,9 @@ export class LoginComponent{
     if (pro1Status) {
       console.log(pro1Status.valueOf)
     }
+
+   const end = action1("Mehmet", 40)
+   console.log("end", end)
     
   }
 

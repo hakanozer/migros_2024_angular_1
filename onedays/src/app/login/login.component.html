@@ -34,3 +34,7 @@
 @for (key of userKey; track $index) {
     <div>{{ key }}</div>
 }
+
+@for (item of products; track $index) {
+    <div>{{ item.pid }} - {{ item.title }}</div>
+}
