@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Product } from '../../models/IAllProducts';
+import { HeaderComponent } from '../inc/header/header.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })
