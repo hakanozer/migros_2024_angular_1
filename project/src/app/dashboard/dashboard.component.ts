@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { Product } from '../../models/IAllProducts';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +11,12 @@ import { ApiService } from '../services/api.service';
 })
 export class DashboardComponent {
 
+  products:Product[] = []
   constructor( private api:ApiService ) {
+    const newThis = this
     api.allProducts().subscribe({
       next(value) {
-        console.log(value)
+        newThis.products = value.products
       },
       error(err) {
         
