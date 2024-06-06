@@ -12,6 +12,7 @@ import { Product } from '../../models/IAllProducts';
 export class DashboardComponent {
 
   products:Product[] = []
+  singleProduct: Product | null = null
   constructor( private api:ApiService ) {
     const newThis = this
     api.allProducts().subscribe({
@@ -23,5 +24,10 @@ export class DashboardComponent {
       },
     })
   }
+
+  singleSelectItem( index: number ) {
+    this.singleProduct = this.products[index]
+  }
+
 
 }
