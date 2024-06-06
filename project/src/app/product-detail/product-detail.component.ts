@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { Product } from '../../models/IAllProducts';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,8 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailComponent {
 
+  bigImagePath = ''
   pid = ''
-  constructor( private route: ActivatedRoute ){
+  product: Product | null = null
+  constructor( 
+    private route: ActivatedRoute,
+    private api: ApiService
+   ){
     this.route.paramMap.forEach(item => {
       const pullPid = item.get('pid')
       if (pullPid) {
@@ -22,7 +29,20 @@ export class ProductDetailComponent {
   }
 
   ngOnInit(): void {
-    console.log('pid', this.pid)
+    const newThis = this
+    this.api.singleProduct(this.pid).subscribe({
+      next(value) {
+        newThis.product = value
+        newThis.bigImagePath = value.images[0]
+      },
+      error(err) {
+        
+      },
+    })
+  }
+
+  bigImageChange(path: string) {
+    this.bigImagePath = path
   }
 
 }
