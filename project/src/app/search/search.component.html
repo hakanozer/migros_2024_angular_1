@@ -1,1 +1,16 @@
 <div appPagetitle [appTitle]="'Search: ' + q"  ></div>
+
+<div class="row">
+    @for (item of arr; track $index) {
+        <div class="col-sm-3 mb-3">
+            <div class="card">
+                <img src={{item.thumbnail}} class="card-img-top" />
+                <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text">{{item.price | price}}</p>
+                <a [routerLink]="[ '/productDetail', item.id]" class="btn btn-primary">Detail</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

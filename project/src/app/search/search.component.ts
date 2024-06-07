@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { PagetitleDirective } from '../directives/pagetitle.directive';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { Product } from '../../models/IAllProducts';
+import { PricePipe } from "../pipes/price.pipe";
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [PagetitleDirective],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+    selector: 'app-search',
+    standalone: true,
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css',
+    imports: [PagetitleDirective, PricePipe, RouterLink]
 })
 export class SearchComponent {
 
   q = ''
+  arr:Product[] = []
   constructor( 
     private activeRouter: ActivatedRoute, 
     private router: Router,
@@ -28,8 +31,7 @@ export class SearchComponent {
       const newThis = this
       this.api.searchProduct(this.q).subscribe({
         next(value) {
-          const arr = value.products
-          console.log(arr)
+          newThis.arr = value.products
         },
         error(err) {
           
