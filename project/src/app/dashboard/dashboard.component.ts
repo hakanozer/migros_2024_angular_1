@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Product } from '../../models/IAllProducts';
 import { RouterLink } from '@angular/router';
-import { HeaderComponent } from '../inc/header/header.component';
+import { PricePipe } from "../pipes/price.pipe";
+import { PagetitleDirective } from '../directives/pagetitle.directive';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [RouterLink, HeaderComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    standalone: true,
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css',
+    imports: [RouterLink, PricePipe, PagetitleDirective]
 })
 export class DashboardComponent {
 

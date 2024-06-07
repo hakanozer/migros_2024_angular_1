@@ -20,4 +20,16 @@ export class HeaderComponent {
     }
   }
 
+  userLogout() {
+    localStorage.removeItem('user')
+    //window.location.href='/'
+    window.location.replace('/')
+    this.clear()
+  }
+
+  clear() {          
+    var Backlen=history.length;
+    if (Backlen > 0) history.go(-Backlen);
+  }
+
 }

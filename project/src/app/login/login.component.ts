@@ -27,6 +27,8 @@ export class LoginComponent {
     const user = this.crypto.getUser()
     if (user) {
       console.log(user)
+      window.location.replace('/dashboard')
+      this.clear()
     }
    }
 
@@ -72,7 +74,10 @@ export class LoginComponent {
     this.http.post<IUser>(login_url, sendObj).subscribe({
       next(res) {
         newThis.crypto.setUser(res)
-        newThis.router.navigate(['/dashboard'])
+        //newThis.router.navigate(['/dashboard'])
+        //window.location.href = '/dashboard'
+        window.location.replace('/dashboard')
+        newThis.clear()
       },
       error(err) {
         console.error(err.error.message)
@@ -82,6 +87,11 @@ export class LoginComponent {
 
     console.log("this line call")
     }
+  }
+
+  clear() {          
+    var Backlen=history.length;
+    if (Backlen > 0) history.go(-Backlen);
   }
 
 }

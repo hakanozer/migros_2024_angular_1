@@ -1,17 +1,16 @@
-<app-header></app-header>
 @if (product) {
 
     <div class="row">
         <div class="col-sm-6">
-            <h2>{{ product.title }}</h2>
+            <div appPagetitle [appTitle]="product.title" ></div>
             <p>{{product.description}}</p>
             <p>{{product.category}}</p>
-            <p>{{product.price}}</p>
+            <p>{{product.price | price}}</p>
             <p>{{product.warrantyInformation}}</p>
             <img src={{product.meta.qrCode}} class="img-thumbnail" width="150"/>
         </div>
         <div class="col-sm-6">
-            <img src={{bigImagePath}} class="img-fluid" />
+            <img src={{bigImagePath}} class="img-fluid" style="max-height: 450px;" />
             <div class="mt-3">
                 @for (url of product.images; track $index) {
                     <img role="button" (click)="bigImageChange(url)" src={{url}} class="img-thumbnail" width="125" />

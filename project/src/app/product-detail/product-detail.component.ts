@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Product } from '../../models/IAllProducts';
-import { HeaderComponent } from '../inc/header/header.component';
+import { PricePipe } from "../pipes/price.pipe";
+import { PagetitleDirective } from '../directives/pagetitle.directive';
 
 @Component({
-  selector: 'app-product-detail',
-  standalone: true,
-  imports: [HeaderComponent],
-  templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.css'
+    selector: 'app-product-detail',
+    standalone: true,
+    templateUrl: './product-detail.component.html',
+    styleUrl: './product-detail.component.css',
+    imports: [PricePipe, PagetitleDirective]
 })
 export class ProductDetailComponent {
 
