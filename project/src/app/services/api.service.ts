@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAllProducts, Product } from '../../models/IAllProducts';
-import { allProduct_url } from '../../utils/util';
+import { allProduct_url, searchProduct_url } from '../../utils/util';
 import { CryptoService } from './crypto.service';
 import { Router } from '@angular/router';
 
@@ -33,6 +33,10 @@ export class ApiService {
   singleProduct(pid: string) {
     const path = '/'+pid
     return this.http.get<Product>(allProduct_url+path)
+  }
+
+  searchProduct(q: string) {
+    return this.http.get<IAllProducts>(searchProduct_url+q)
   }
 
 

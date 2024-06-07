@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import { Product } from '../../models/IAllProducts';
 import { PricePipe } from "../pipes/price.pipe";
 import { PagetitleDirective } from '../directives/pagetitle.directive';
+import { SeoService } from '../services/seo.service';
 
 @Component({
     selector: 'app-product-detail',
@@ -19,7 +20,8 @@ export class ProductDetailComponent {
   product: Product | null = null
   constructor( 
     private route: ActivatedRoute,
-    private api: ApiService
+    private api: ApiService,
+    private seo: SeoService
    ){
     this.route.paramMap.forEach(item => {
       const pullPid = item.get('pid')
@@ -36,6 +38,8 @@ export class ProductDetailComponent {
       next(value) {
         newThis.product = value
         newThis.bigImagePath = value.images[0]
+        newThis.seo.setTitle(value.title)
+        newThis.seo.setDescription(value.description)
       },
       error(err) {
         
